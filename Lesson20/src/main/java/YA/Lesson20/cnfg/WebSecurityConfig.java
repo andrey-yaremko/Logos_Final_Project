@@ -36,8 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/")
                 .permitAll()
-                .antMatchers("/home")
-                .access("hasRole('USER')")
+                .antMatchers("/home").permitAll()
+                //.access("hasRole('USER') or hasRole('ADMIN')")
+                .antMatchers("/create-periodical").permitAll()
+                //.access("hasRole('USER')")
                 .anyRequest()
                 .permitAll()
                 .and()
@@ -50,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and().logout()
                 .logoutSuccessUrl("/login?logout")
-                .and().exceptionHandling().accessDeniedPage("/error")
+                .and().exceptionHandling().accessDeniedPage("/403")
                 .and().csrf();
     }
 
