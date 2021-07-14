@@ -59,9 +59,4 @@ public class UserController {
         return map;
     }
 
-    @RequestMapping(value ="/create-periodical", method = RequestMethod.GET)
-    public ModelAndView createPeriodical() {
-        return new ModelAndView("create-periodical","periodical", new Periodical());
-    }
-
 }
