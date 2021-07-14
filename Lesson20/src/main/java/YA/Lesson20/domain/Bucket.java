@@ -1,19 +1,30 @@
 package YA.Lesson20.domain;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "bucket")
 public class Bucket {
-    private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @ManyToOne(targetEntity = YA.Lesson20.domain.User.class)
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private Integer userId;
+    @ManyToOne(targetEntity = YA.Lesson20.domain.User.class)
+    @JoinColumn(name = "product_id", referencedColumnName ="id")
     private Integer productId;
+    @Column
     private Date purchaseDate;
 
     public Bucket() {
         super();
     }
 
-    public Bucket(Long id, Integer userId, Integer productId, Date purchaseDate) {
+    public Bucket(Integer id, Integer userId, Integer productId, Date purchaseDate) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;
@@ -27,11 +38,11 @@ public class Bucket {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

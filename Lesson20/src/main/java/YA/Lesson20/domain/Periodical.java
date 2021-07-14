@@ -1,18 +1,26 @@
 package YA.Lesson20.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "product")
 public class Periodical {
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column
     private String name;
+    @Column
     private String description;
+    @Column
     private Double price;
 
     public Periodical() {
         super();
     }
 
-    public Periodical(Long id, String name, String description, Double price) {
+    public Periodical(Integer id, String name, String description, Double price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,11 +34,11 @@ public class Periodical {
         this.price = price;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
