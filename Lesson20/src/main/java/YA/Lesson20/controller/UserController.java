@@ -1,9 +1,5 @@
 package YA.Lesson20.controller;
 
-import YA.Lesson20.domain.Periodical;
-import YA.Lesson20.domain.User;
-import YA.Lesson20.service.PeriodicalService;
-import YA.Lesson20.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,17 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import YA.Lesson20.domain.User;
+import YA.Lesson20.service.PeriodicalService;
+import YA.Lesson20.service.UserService;
+
 @Controller
 public class UserController {
     @Autowired
-    private PeriodicalService periodicalService;
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    private PeriodicalService periodicalsService;
+
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
+
         return "registration";
     }
 
@@ -52,11 +54,14 @@ public class UserController {
 
     @RequestMapping(value ="/home", method = RequestMethod.GET)
     public ModelAndView welcome() {
-
-        ModelAndView map = new ModelAndView();
-        map.addObject("periodicals",periodicalService.getAllPeriodical());
+        ModelAndView map = new ModelAndView("home");
+        map.addObject("periodicals", periodicalsService.getAllPeriodical());
 
         return map;
     }
 
+    @RequestMapping(value ="/create-periodical", method = RequestMethod.GET)
+    public String createPeriodical() {
+        return "createPeriodical";
+    }
 }

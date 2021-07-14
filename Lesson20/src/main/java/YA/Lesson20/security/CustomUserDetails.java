@@ -1,16 +1,20 @@
 package YA.Lesson20.security;
 
-import YA.Lesson20.domain.User;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
-import java.util.Collection;
-import java.util.List;
+import YA.Lesson20.domain.User;
 
-public class CustomUserDetails extends User implements UserDetails {
+public class CustomUserDetails extends User implements UserDetails{
 
+    /**
+     *
+     */
     private static final long serialVersionUID = 1L;
     private List<String> userRoles;
 
@@ -19,9 +23,10 @@ public class CustomUserDetails extends User implements UserDetails {
         this.userRoles = userRoles;
     }
 
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-    String roles = StringUtils.collectionToCommaDelimitedString(userRoles);
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        String roles = StringUtils.collectionToCommaDelimitedString(userRoles);
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 
@@ -50,3 +55,4 @@ public class CustomUserDetails extends User implements UserDetails {
         return true;
     }
 }
+
